@@ -7,65 +7,53 @@
 
 package frc4388.robot;
 
-import com.ctre.phoenix.motorcontrol.InvertType;
-import com.ctre.phoenix.motorcontrol.NeutralMode;
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
-import com.ctre.phoenix.sensors.PigeonIMU;
+import static frc4388.robot.Constants.DriveConstants.*;
+import static frc4388.robot.Constants.HornConstants.*;
+import static frc4388.robot.Constants.ShooterConstants.*;
 
-import edu.wpi.first.wpilibj.Spark;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+
+import edu.wpi.first.wpilibj.PneumaticsModuleType;
+import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
-import frc4388.robot.Constants.DriveConstants;
-import frc4388.robot.Constants.LEDConstants;
-import frc4388.utility.RobotGyro;
 
 /**
- * Defines and holds all I/O objects on the Roborio. This is useful for unit
- * testing and modularization.
+ * Defines and holds all I/O objects on the Roborio. This is useful for unit testing and
+ * modularization.
  */
 public class RobotMap {
 
-    public RobotMap() {
-        configureLEDMotorControllers();
-        configureDriveMotorControllers();
-    }
+  public RobotMap() {
+    configureDriveMotorControllers();
+  }
 
-    /* LED Subsystem */
-    public final Spark LEDController = new Spark(LEDConstants.LED_SPARK_ID);
+  /* Drive Subsystem */
+  public final WPI_TalonSRX driveLeftMotor = new WPI_TalonSRX(DRIVE_LEFT_CAN_ID);
+  public final WPI_TalonSRX driveRightMotor = new WPI_TalonSRX(DRIVE_RIGHT_CAN_ID);
+  public final DifferentialDrive driveBase = new DifferentialDrive(driveLeftMotor, driveRightMotor);
 
-    void configureLEDMotorControllers() {
-        
-    }
+  void configureDriveMotorControllers() {
+    /* factory default values */
+    driveLeftMotor.configFactoryDefault();
+    driveRightMotor.configFactoryDefault();
 
-    /* Drive Subsystem */
-    public final WPI_TalonFX leftFrontMotor = new WPI_TalonFX(DriveConstants.DRIVE_LEFT_FRONT_CAN_ID);
-    public final WPI_TalonFX rightFrontMotor = new WPI_TalonFX(DriveConstants.DRIVE_RIGHT_FRONT_CAN_ID);
-    public final WPI_TalonFX leftBackMotor = new WPI_TalonFX(DriveConstants.DRIVE_LEFT_BACK_CAN_ID);
-    public final WPI_TalonFX rightBackMotor = new WPI_TalonFX(DriveConstants.DRIVE_RIGHT_BACK_CAN_ID);
-    public final DifferentialDrive driveTrain = new DifferentialDrive(leftFrontMotor, rightFrontMotor);
-    public final RobotGyro gyroDrive = new RobotGyro(new PigeonIMU(DriveConstants.DRIVE_PIGEON_ID));
+    /* set neutral mode */
+    driveLeftMotor.setNeutralMode(NeutralMode.Brake);
+    driveRightMotor.setNeutralMode(NeutralMode.Brake);
+  }
 
-    void configureDriveMotorControllers() {
+  /* Horn subsystem */
+  public final Solenoid hornSolenoid = new Solenoid(PneumaticsModuleType.REVPH, HORN_SOLENOID_ID);
 
-        /* factory default values */
-        leftFrontMotor.configFactoryDefault();
-        rightFrontMotor.configFactoryDefault();
-        leftBackMotor.configFactoryDefault();
-        rightBackMotor.configFactoryDefault();
+  /* Shooter subsystem */
+  public final Solenoid shooterLowerLefterSolenoid = new Solenoid(PneumaticsModuleType.REVPH, SHOOTER_LOWER_LEFTER_SOLENOID_ID);
+  public final Solenoid shooterLowerLeftSolenoid = new Solenoid(PneumaticsModuleType.REVPH, SHOOTER_LOWER_LEFT_SOLENOID_ID);
+  public final Solenoid shooterLowerRightSolenoid = new Solenoid(PneumaticsModuleType.REVPH, SHOOTER_LOWER_RIGHT_SOLENOID_ID);
+  public final Solenoid shooterLowerRighterSolenoid = new Solenoid(PneumaticsModuleType.REVPH, SHOOTER_LOWER_RIGHTER_SOLENOID_ID);
+  public final Solenoid shooterUpperLefterSolenoid = new Solenoid(PneumaticsModuleType.REVPH, SHOOTER_UPPER_LEFTER_SOLENOID_ID);
+  public final Solenoid shooterUpperLeftSolenoid = new Solenoid(PneumaticsModuleType.REVPH, SHOOTER_UPPER_LEFT_SOLENOID_ID);
+  public final Solenoid shooterUpperRightSolenoid = new Solenoid(PneumaticsModuleType.REVPH, SHOOTER_UPPER_RIGHT_SOLENOID_ID);
+  public final Solenoid shooterUpperRighterSolenoid = new Solenoid(PneumaticsModuleType.REVPH, SHOOTER_UPPER_RIGHTER_SOLENOID_ID);
 
-        /* set back motors as followers */
-        leftBackMotor.follow(leftFrontMotor);
-        rightBackMotor.follow(rightFrontMotor);
-
-        /* set neutral mode */
-        leftFrontMotor.setNeutralMode(NeutralMode.Brake);
-        rightFrontMotor.setNeutralMode(NeutralMode.Brake);
-        leftFrontMotor.setNeutralMode(NeutralMode.Brake);
-        rightFrontMotor.setNeutralMode(NeutralMode.Brake);
-
-        /* flip input so forward becomes back, etc */
-        leftFrontMotor.setInverted(false);
-        rightFrontMotor.setInverted(false);
-        leftBackMotor.setInverted(InvertType.FollowMaster);
-        rightBackMotor.setInverted(InvertType.FollowMaster);
-    }
 }
