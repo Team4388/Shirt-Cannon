@@ -4,7 +4,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj.Solenoid;
 
 public class Shooter extends SubsystemBase {
-  Solenoid m_solenoid;
+  private final Solenoid m_solenoid;
 
   public Shooter(Solenoid solenoid) {
     m_solenoid = solenoid;

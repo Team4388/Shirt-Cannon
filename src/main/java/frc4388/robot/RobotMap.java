@@ -14,39 +14,49 @@ import static frc4388.robot.Constants.ShooterConstants.*;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
+import edu.wpi.first.util.sendable.SendableRegistry;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 
 /**
- * Defines and holds all I/O objects on the Roborio. This is useful for unit testing and
+ * Defines and holds all I/O objects on the roboRIO. This is useful for unit testing and
  * modularization.
  */
 public class RobotMap {
 
   public RobotMap() {
     configureDriveMotorControllers();
+    configureLiveWindow();
   }
 
   /* Drive Subsystem */
-  public final WPI_TalonSRX driveLeftMotor = new WPI_TalonSRX(DRIVE_LEFT_CAN_ID);
-  public final WPI_TalonSRX driveRightMotor = new WPI_TalonSRX(DRIVE_RIGHT_CAN_ID);
-  public final DifferentialDrive driveBase = new DifferentialDrive(driveLeftMotor, driveRightMotor);
+  public final WPI_TalonSRX driveLeftLeaderMotor = new WPI_TalonSRX(DRIVE_LEFT_LEADER_CAN_ID);
+  public final WPI_TalonSRX driveRightLeaderMotor = new WPI_TalonSRX(DRIVE_RIGHT_LEADER_CAN_ID);
+  public final WPI_TalonSRX driveLeftFollowerMotor = new WPI_TalonSRX(DRIVE_LEFT_FOLLOWER_CAN_ID);
+  public final WPI_TalonSRX driveRightFollowerMotor = new WPI_TalonSRX(DRIVE_RIGHT_FOLLOWER_CAN_ID);
 
-  void configureDriveMotorControllers() {
-    /* factory default values */
-    driveLeftMotor.configFactoryDefault();
-    driveRightMotor.configFactoryDefault();
+  public final DifferentialDrive driveBase = new DifferentialDrive(driveLeftLeaderMotor, driveRightLeaderMotor);
 
-    /* set neutral mode */
-    driveLeftMotor.setNeutralMode(NeutralMode.Brake);
-    driveRightMotor.setNeutralMode(NeutralMode.Brake);
+  private void configureDriveMotorControllers() {
+    driveLeftLeaderMotor.configFactoryDefault();
+    driveRightLeaderMotor.configFactoryDefault();
+    driveLeftFollowerMotor.configFactoryDefault();
+    driveRightFollowerMotor.configFactoryDefault();
+
+    driveLeftLeaderMotor.setNeutralMode(NeutralMode.Brake);
+    driveRightLeaderMotor.setNeutralMode(NeutralMode.Brake);
+    driveLeftFollowerMotor.setNeutralMode(NeutralMode.Brake);
+    driveRightFollowerMotor.setNeutralMode(NeutralMode.Brake);
+
+    driveLeftFollowerMotor.follow(driveLeftLeaderMotor);
+    driveRightFollowerMotor.follow(driveRightLeaderMotor);
   }
 
-  /* Horn subsystem */
+  /* Horn Subsystem */
   public final Solenoid hornSolenoid = new Solenoid(PneumaticsModuleType.REVPH, HORN_SOLENOID_ID);
 
-  /* Shooter subsystem */
+  /* Shooter Subsystem */
   public final Solenoid shooterLowerLefterSolenoid = new Solenoid(PneumaticsModuleType.REVPH, SHOOTER_LOWER_LEFTER_SOLENOID_ID);
   public final Solenoid shooterLowerLeftSolenoid = new Solenoid(PneumaticsModuleType.REVPH, SHOOTER_LOWER_LEFT_SOLENOID_ID);
   public final Solenoid shooterLowerRightSolenoid = new Solenoid(PneumaticsModuleType.REVPH, SHOOTER_LOWER_RIGHT_SOLENOID_ID);
@@ -56,4 +66,21 @@ public class RobotMap {
   public final Solenoid shooterUpperRightSolenoid = new Solenoid(PneumaticsModuleType.REVPH, SHOOTER_UPPER_RIGHT_SOLENOID_ID);
   public final Solenoid shooterUpperRighterSolenoid = new Solenoid(PneumaticsModuleType.REVPH, SHOOTER_UPPER_RIGHTER_SOLENOID_ID);
 
+
+  private void configureLiveWindow() {
+    SendableRegistry.setName(driveLeftFollowerMotor, "Drive", "Left Follower Motor");
+    SendableRegistry.setName(driveRightFollowerMotor, "Drive", "Right Follower Motor");
+    SendableRegistry.setName(driveBase, "Drive", "Drive Base");
+
+    SendableRegistry.setName(hornSolenoid, "Horn", "Solenoid");
+
+    SendableRegistry.setName(shooterLowerLefterSolenoid, "Shooter", "Lower Lefter Solenoid");
+    SendableRegistry.setName(shooterLowerLeftSolenoid, "Shooter", "Lower Left Solenoid");
+    SendableRegistry.setName(shooterLowerRightSolenoid, "Shooter", "Lower Right Solenoid");
+    SendableRegistry.setName(shooterLowerRighterSolenoid, "Shooter", "Lower Righter Solenoid");
+    SendableRegistry.setName(shooterUpperLefterSolenoid, "Shooter", "Upper Lefter Solenoid");
+    SendableRegistry.setName(shooterUpperLeftSolenoid, "Shooter", "Upper Left Solenoid");
+    SendableRegistry.setName(shooterUpperRightSolenoid, "Shooter", "Upper Right Solenoid");
+    SendableRegistry.setName(shooterUpperRighterSolenoid, "Shooter", "Upper Righter Solenoid");
+  }
 }

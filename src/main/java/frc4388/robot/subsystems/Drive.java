@@ -6,16 +6,14 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Drive extends SubsystemBase {
-  private WPI_TalonSRX m_leftMotor;
-  private WPI_TalonSRX m_rightMotor;
-  private DifferentialDrive m_driveBase;
+  private final WPI_TalonSRX m_leftMotor;
+  private final WPI_TalonSRX m_rightMotor;
+  private final DifferentialDrive m_driveBase;
 
   public Drive(WPI_TalonSRX leftMotor, WPI_TalonSRX rightMotor, DifferentialDrive driveBase) {
     m_leftMotor = leftMotor;
     m_rightMotor = rightMotor;
     m_driveBase = driveBase;
-    addChild("Left Motor", m_leftMotor);
-    addChild("Right Motor", m_rightMotor);
   }
 
   public void arcadeDrive(double xSpeed, double zRotation) {

@@ -1,11 +1,10 @@
 package frc4388.robot;
 
-import edu.wpi.first.networktables.EntryListenerFlags;
-import edu.wpi.first.networktables.NetworkTableEntry;
-import edu.wpi.first.networktables.NetworkTableInstance;
+import edu.wpi.first.util.sendable.Sendable;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandGroupBase;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
@@ -30,27 +29,22 @@ public class RobotContainer {
   private final RobotMap m_robotMap = new RobotMap();
 
   /* Subsystems */
-  private final Drive m_robotDrive = new Drive(m_robotMap.driveLeftMotor, m_robotMap.driveRightMotor, m_robotMap.driveBase);
-  private final Shooter[][] m_robotShooterRows = {
-    {
-      new Shooter(m_robotMap.shooterLowerLefterSolenoid),
-      new Shooter(m_robotMap.shooterLowerLeftSolenoid),
-      new Shooter(m_robotMap.shooterLowerRightSolenoid),
-      new Shooter(m_robotMap.shooterLowerRighterSolenoid),
-    },
-    {
-      new Shooter(m_robotMap.shooterUpperLefterSolenoid),
-      new Shooter(m_robotMap.shooterUpperLeftSolenoid),
-      new Shooter(m_robotMap.shooterUpperRightSolenoid),
-      new Shooter(m_robotMap.shooterUpperRighterSolenoid)
-    }
-  };
+  private final Drive m_robotDrive = new Drive(m_robotMap.driveLeftLeaderMotor, m_robotMap.driveRightLeaderMotor, m_robotMap.driveBase);
+
+  private final Shooter m_robotShooterLowerLefterSolenoid = new Shooter(m_robotMap.shooterLowerLefterSolenoid);
+  private final Shooter m_robotShooterLowerLeftSolenoid = new Shooter(m_robotMap.shooterLowerLeftSolenoid);
+  private final Shooter m_robotShooterLowerRightSolenoid = new Shooter(m_robotMap.shooterLowerRightSolenoid);
+  private final Shooter m_robotShooterLowerRighterSolenoid = new Shooter(m_robotMap.shooterLowerRighterSolenoid);
+
+  private final Shooter m_robotShooterUpperLefterSolenoid = new Shooter(m_robotMap.shooterUpperLefterSolenoid);
+  private final Shooter m_robotShooterUpperLeftSolenoid = new Shooter(m_robotMap.shooterUpperLeftSolenoid);
+  private final Shooter m_robotShooterUpperRightSolenoid = new Shooter(m_robotMap.shooterUpperRightSolenoid);
+  private final Shooter m_robotShooterUpperRighterSolenoid = new Shooter(m_robotMap.shooterUpperRighterSolenoid);
+
   private final Horn m_robotHorn = new Horn(m_robotMap.hornSolenoid);
 
   /* Controllers */
   private final XboxController m_controller = new XboxController(OIConstants.CONTROLLER_ID);
-  private final NetworkTableInteger m_shooterRowIndex = new NetworkTableInteger("Shooter/Row", 0, 0, 1);
-  private final NetworkTableInteger m_shooterColumnIndex = new NetworkTableInteger("Shooter/Column", 0, 0, 3);
 
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -70,57 +64,41 @@ public class RobotContainer {
    * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    // B Button: Fire Selected Shooter
-    new JoystickButton(getController(), XboxController.Button.kB.value).whenPressed(this::fireShooterWithFeedback);
-    // A Button: Sound Horn
-    new JoystickButton(getController(), XboxController.Button.kA.value).whenPressed(() -> m_robotHorn.set(true)).whenReleased(() -> m_robotHorn.set(false));
-    // Right Bumper: Shift Column Selection Right
-    new JoystickButton(getController(), XboxController.Button.kRightBumper.value).whenPressed(() -> m_shooterColumnIndex.set(m_shooterColumnIndex.get() + 1));
-    // Left Bumper: Shift Column Selection Left
-    new JoystickButton(getController(), XboxController.Button.kLeftBumper.value).whenPressed(() -> m_shooterColumnIndex.set(m_shooterColumnIndex.get() - 1));
-    // D-Pad Down: Select Lower Shooter Row
-    new POVButton(getController(), 180).whenPressed(() -> m_shooterRowIndex.set(0));
-    // D-Pad Up: Select Upper Shooter Row
-    new POVButton(getController(), 0).whenPressed(() -> m_shooterRowIndex.set(1));
-    // D-Pad Left: Select Righter Shooter Column
-    new POVButton(getController(), 90).whenPressed(() -> m_shooterColumnIndex.set(3));
-    // D-Pad Right: Select Lefter Shooter Column
-    new POVButton(getController(), 270).whenPressed(() -> m_shooterColumnIndex.set(0));
+    // Y Button: Fire Upper Lefter Shooter
+    new JoystickButton(getController(), XboxController.Button.kY.value).whenPressed(putToDashboard("Y", new InstantCommand(() -> fireShooterWithFeedback(m_robotShooterUpperLefterSolenoid)).withName("Fire Upper Lefter")));
+    // B Button: Fire Upper Right Shooter
+    new JoystickButton(getController(), XboxController.Button.kB.value).whenPressed(putToDashboard("B", new InstantCommand(() -> fireShooterWithFeedback(m_robotShooterUpperRightSolenoid)).withName("Fire Upper Right")));
+    // A Button: Fire Upper Righter Shooter
+    new JoystickButton(getController(), XboxController.Button.kA.value).whenPressed(putToDashboard("A", new InstantCommand(() -> fireShooterWithFeedback(m_robotShooterUpperRighterSolenoid)).withName("Fire Upper Righter")));
+    // X Button: Fire Upper Left Shooter
+    new JoystickButton(getController(), XboxController.Button.kX.value).whenPressed(putToDashboard("X", new InstantCommand(() -> fireShooterWithFeedback(m_robotShooterUpperLeftSolenoid)).withName("Fire Upper Left")));
+
+    // D-Pad Up: Fire Lower Lefter Shooter
+    new POVButton(getController(), 0).whenPressed(putToDashboard("Up", new InstantCommand(() -> fireShooterWithFeedback(m_robotShooterLowerLefterSolenoid)).withName("Fire Lower Lefter")));
+    // D-Pad Right: Fire Lower Right Shooter
+    new POVButton(getController(), 90).whenPressed(putToDashboard("Right", new InstantCommand(() -> fireShooterWithFeedback(m_robotShooterLowerRightSolenoid)).withName("Fire Lower Right")));
+    // D-Pad Left: Fire Lower Righter Shooter
+    new POVButton(getController(), 180).whenPressed(putToDashboard("Down", new InstantCommand(() -> fireShooterWithFeedback(m_robotShooterLowerRighterSolenoid)).withName("Fire Lower Righter")));
+    // D-Pad Up: Fire Lower Left Shooter
+    new POVButton(getController(), 270).whenPressed(putToDashboard("Left", new InstantCommand(() -> fireShooterWithFeedback(m_robotShooterLowerLeftSolenoid)).withName("Fire Lower Left")));
+
+    // Right Bumper: Sound Horn
+    new JoystickButton(getController(), XboxController.Button.kRightBumper.value).whenPressed(() -> m_robotHorn.set(true)).whenReleased(() -> m_robotHorn.set(false));
+    // Left Bumper: Sound Horn
+    new JoystickButton(getController(), XboxController.Button.kLeftBumper.value).whenPressed(() -> m_robotHorn.set(true)).whenReleased(() -> m_robotHorn.set(false));
   }
 
-  private void fireShooterWithFeedback() {
-    boolean fired = m_robotShooterRows[m_shooterRowIndex.get()][m_shooterColumnIndex.get()].set(true);
-    RumbleType rumbleType = m_shooterColumnIndex.get() < 2 ? RumbleType.kLeftRumble : RumbleType.kRightRumble;
+  private static <T extends Sendable> T putToDashboard(String key, T data) {
+    SmartDashboard.putData(key, data);
+    return data;
+  }
+
+  private void fireShooterWithFeedback(Shooter shooter) {
+    boolean fired = shooter.set(true);
+    RumbleType rumbleType = shooter.getName().contains("Left") ? RumbleType.kLeftRumble : RumbleType.kRightRumble;
     double value = fired ? 0.3 : 0.6;
     double duration = fired ? 0.3 : 0.4;
     CommandGroupBase.sequence(new InstantCommand(() -> getController().setRumble(rumbleType, value)), new WaitCommand(duration), new InstantCommand(() -> getController().setRumble(rumbleType, 0.0))).schedule();
-    System.out.println(m_shooterRowIndex.get() + ":" + m_shooterColumnIndex.get());
-  }
-
-  private static class NetworkTableInteger {
-    private final NetworkTableEntry m_entry;
-    private final int m_defaultValue;
-
-    public NetworkTableInteger(String name, int defaultValue, int minValue, int maxValue) {
-      m_defaultValue = defaultValue;
-      m_entry = NetworkTableInstance.getDefault().getTable("SmartDashboard").getEntry(name);
-      m_entry.setDouble(m_defaultValue);
-      m_entry.addListener(event -> {
-        if (event.value.isDouble()) {
-          double entryValue = event.value.getDouble();
-          double safeValue = Math.max(minValue, Math.min((int) entryValue, maxValue));
-          if (entryValue != safeValue) event.getEntry().setDouble(safeValue);
-        } else event.getEntry().setDouble(m_defaultValue);
-      }, EntryListenerFlags.kImmediate | EntryListenerFlags.kNew | EntryListenerFlags.kUpdate);
-    }
-
-    public int get() {
-      return (int) m_entry.getDouble(m_defaultValue);
-    }
-
-    public void set(int value) {
-      m_entry.setDouble(value);
-    }
   }
 
   /**

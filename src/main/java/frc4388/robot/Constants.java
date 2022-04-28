@@ -11,19 +11,21 @@ package frc4388.robot;
  */
 public final class Constants {
   public static final class DriveConstants {
-    public static final int DRIVE_LEFT_CAN_ID = 2;
-    public static final int DRIVE_RIGHT_CAN_ID = 3;
+    public static final int DRIVE_LEFT_LEADER_CAN_ID = 2;
+    public static final int DRIVE_RIGHT_LEADER_CAN_ID = 3;
+    public static final int DRIVE_LEFT_FOLLOWER_CAN_ID = 4;
+    public static final int DRIVE_RIGHT_FOLLOWER_CAN_ID = 5;
   }
 
   public static final class ShooterConstants {
-    public static final int SHOOTER_LOWER_LEFTER_SOLENOID_ID  = 1;
-    public static final int SHOOTER_LOWER_LEFT_SOLENOID_ID  = 2;
+    public static final int SHOOTER_LOWER_LEFTER_SOLENOID_ID = 1;
+    public static final int SHOOTER_LOWER_LEFT_SOLENOID_ID = 2;
     public static final int SHOOTER_LOWER_RIGHT_SOLENOID_ID = 3;
-    public static final int SHOOTER_LOWER_RIGHTER_SOLENOID_ID  = 4;
-    public static final int SHOOTER_UPPER_LEFTER_SOLENOID_ID  = 5;
-    public static final int SHOOTER_UPPER_LEFT_SOLENOID_ID  = 6;
+    public static final int SHOOTER_LOWER_RIGHTER_SOLENOID_ID = 4;
+    public static final int SHOOTER_UPPER_LEFTER_SOLENOID_ID = 5;
+    public static final int SHOOTER_UPPER_LEFT_SOLENOID_ID = 6;
     public static final int SHOOTER_UPPER_RIGHT_SOLENOID_ID = 7;
-    public static final int SHOOTER_UPPER_RIGHTER_SOLENOID_ID  = 8;
+    public static final int SHOOTER_UPPER_RIGHTER_SOLENOID_ID = 8;
   }
 
   public static final class HornConstants {
