@@ -10,9 +10,31 @@ public class Shooter extends SubsystemBase {
     m_solenoid = solenoid;
   }
 
-  public boolean set(boolean on) {
-    if (m_solenoid.get() == on) return false;
-    m_solenoid.set(on);
+  /**
+   * Check if the shooter is ready to fire.
+   * 
+   * @return True if the shooter is ready or false if the shooter is not ready
+   */
+  public boolean isReady() {
+    return !m_solenoid.get();
+  }
+
+  /**
+   * Ready the shooter to fire.
+   */
+  public void ready() {
+    m_solenoid.set(false);
+  }
+
+  /**
+   * Fire the shooter if it is ready.
+   * 
+   * @return True if the shooter was ready or false if the shooter was not ready
+   */
+  public boolean fire() {
+    if (!isReady())
+      return false;
+    m_solenoid.set(true);
     return true;
   }
 }

@@ -31,56 +31,56 @@ public class RobotMap {
   }
 
   /* Drive Subsystem */
-  public final WPI_TalonSRX driveLeftLeaderMotor = new WPI_TalonSRX(DRIVE_LEFT_LEADER_CAN_ID);
-  public final WPI_TalonSRX driveRightLeaderMotor = new WPI_TalonSRX(DRIVE_RIGHT_LEADER_CAN_ID);
-  public final WPI_TalonSRX driveLeftFollowerMotor = new WPI_TalonSRX(DRIVE_LEFT_FOLLOWER_CAN_ID);
-  public final WPI_TalonSRX driveRightFollowerMotor = new WPI_TalonSRX(DRIVE_RIGHT_FOLLOWER_CAN_ID);
+  public final WPI_TalonSRX driveMotorLeftLeader = new WPI_TalonSRX(DRIVE_LEFT_LEADER_ID);
+  public final WPI_TalonSRX driveMotorRightLeader = new WPI_TalonSRX(DRIVE_RIGHT_LEADER_ID);
+  public final WPI_TalonSRX driveMotorLeftFollower = new WPI_TalonSRX(DRIVE_LEFT_FOLLOWER_ID);
+  public final WPI_TalonSRX driveMotorRightFollower = new WPI_TalonSRX(DRIVE_RIGHT_FOLLOWER_ID);
 
-  public final DifferentialDrive driveBase = new DifferentialDrive(driveLeftLeaderMotor, driveRightLeaderMotor);
+  public final DifferentialDrive driveBase = new DifferentialDrive(driveMotorLeftLeader, driveMotorRightLeader);
 
   private void configureDriveMotorControllers() {
-    driveLeftLeaderMotor.configFactoryDefault();
-    driveRightLeaderMotor.configFactoryDefault();
-    driveLeftFollowerMotor.configFactoryDefault();
-    driveRightFollowerMotor.configFactoryDefault();
+    driveMotorLeftLeader.configFactoryDefault();
+    driveMotorRightLeader.configFactoryDefault();
+    driveMotorLeftFollower.configFactoryDefault();
+    driveMotorRightFollower.configFactoryDefault();
 
-    driveLeftLeaderMotor.setNeutralMode(NeutralMode.Brake);
-    driveRightLeaderMotor.setNeutralMode(NeutralMode.Brake);
-    driveLeftFollowerMotor.setNeutralMode(NeutralMode.Brake);
-    driveRightFollowerMotor.setNeutralMode(NeutralMode.Brake);
+    driveMotorLeftLeader.setNeutralMode(NeutralMode.Brake);
+    driveMotorRightLeader.setNeutralMode(NeutralMode.Brake);
+    driveMotorLeftFollower.setNeutralMode(NeutralMode.Brake);
+    driveMotorRightFollower.setNeutralMode(NeutralMode.Brake);
 
-    driveLeftFollowerMotor.follow(driveLeftLeaderMotor);
-    driveRightFollowerMotor.follow(driveRightLeaderMotor);
+    driveMotorLeftFollower.follow(driveMotorLeftLeader);
+    driveMotorRightFollower.follow(driveMotorRightLeader);
   }
 
   /* Horn Subsystem */
   public final Solenoid hornSolenoid = new Solenoid(PneumaticsModuleType.REVPH, HORN_SOLENOID_ID);
 
   /* Shooter Subsystem */
-  public final Solenoid shooterLowerLefterSolenoid = new Solenoid(PneumaticsModuleType.REVPH, SHOOTER_LOWER_LEFTER_SOLENOID_ID);
-  public final Solenoid shooterLowerLeftSolenoid = new Solenoid(PneumaticsModuleType.REVPH, SHOOTER_LOWER_LEFT_SOLENOID_ID);
-  public final Solenoid shooterLowerRightSolenoid = new Solenoid(PneumaticsModuleType.REVPH, SHOOTER_LOWER_RIGHT_SOLENOID_ID);
-  public final Solenoid shooterLowerRighterSolenoid = new Solenoid(PneumaticsModuleType.REVPH, SHOOTER_LOWER_RIGHTER_SOLENOID_ID);
-  public final Solenoid shooterUpperLefterSolenoid = new Solenoid(PneumaticsModuleType.REVPH, SHOOTER_UPPER_LEFTER_SOLENOID_ID);
-  public final Solenoid shooterUpperLeftSolenoid = new Solenoid(PneumaticsModuleType.REVPH, SHOOTER_UPPER_LEFT_SOLENOID_ID);
-  public final Solenoid shooterUpperRightSolenoid = new Solenoid(PneumaticsModuleType.REVPH, SHOOTER_UPPER_RIGHT_SOLENOID_ID);
-  public final Solenoid shooterUpperRighterSolenoid = new Solenoid(PneumaticsModuleType.REVPH, SHOOTER_UPPER_RIGHTER_SOLENOID_ID);
+  public final Solenoid shooterSolenoidBottomLeftOuter = new Solenoid(PneumaticsModuleType.REVPH, SHOOTER_SOLENOID_BOTTOM_LEFT_OUTER_ID);
+  public final Solenoid shooterSolenoidBottomLeftInner = new Solenoid(PneumaticsModuleType.REVPH, SHOOTER_SOLENOID_BOTTOM_LEFT_INNER_ID);
+  public final Solenoid shooterSolenoidBottomRightInner = new Solenoid(PneumaticsModuleType.REVPH, SHOOTER_SOLENOID_BOTTOM_RIGHT_INNER_ID);
+  public final Solenoid shooterSolenoidBottomRightOuter = new Solenoid(PneumaticsModuleType.REVPH, SHOOTER_SOLENOID_BOTTOM_RIGHT_OUTER_ID);
+  public final Solenoid shooterSolenoidTopLeftOuter = new Solenoid(PneumaticsModuleType.REVPH, SHOOTER_SOLENOID_TOP_LEFT_OUTER_ID);
+  public final Solenoid shooterSolenoidTopLeftInner = new Solenoid(PneumaticsModuleType.REVPH, SHOOTER_SOLENOID_TOP_LEFT_INNER_ID);
+  public final Solenoid shooterSolenoidTopRightInner = new Solenoid(PneumaticsModuleType.REVPH, SHOOTER_SOLENOID_TOP_RIGHT_INNER_ID);
+  public final Solenoid shooterSolenoidTopRightOuter = new Solenoid(PneumaticsModuleType.REVPH, SHOOTER_SOLENOID_TOP_RIGHT_OUTER_ID);
 
 
   private void configureLiveWindow() {
-    SendableRegistry.setName(driveLeftFollowerMotor, "Drive", "Left Follower Motor");
-    SendableRegistry.setName(driveRightFollowerMotor, "Drive", "Right Follower Motor");
-    SendableRegistry.setName(driveBase, "Drive", "Drive Base");
+    SendableRegistry.setName(driveMotorLeftFollower, "Drive", "Motor Left Follower");
+    SendableRegistry.setName(driveMotorRightFollower, "Drive", "Motor Right Follower");
+    SendableRegistry.setName(driveBase, "Drive", "Base");
 
     SendableRegistry.setName(hornSolenoid, "Horn", "Solenoid");
 
-    SendableRegistry.setName(shooterLowerLefterSolenoid, "Shooter", "Lower Lefter Solenoid");
-    SendableRegistry.setName(shooterLowerLeftSolenoid, "Shooter", "Lower Left Solenoid");
-    SendableRegistry.setName(shooterLowerRightSolenoid, "Shooter", "Lower Right Solenoid");
-    SendableRegistry.setName(shooterLowerRighterSolenoid, "Shooter", "Lower Righter Solenoid");
-    SendableRegistry.setName(shooterUpperLefterSolenoid, "Shooter", "Upper Lefter Solenoid");
-    SendableRegistry.setName(shooterUpperLeftSolenoid, "Shooter", "Upper Left Solenoid");
-    SendableRegistry.setName(shooterUpperRightSolenoid, "Shooter", "Upper Right Solenoid");
-    SendableRegistry.setName(shooterUpperRighterSolenoid, "Shooter", "Upper Righter Solenoid");
+    SendableRegistry.setName(shooterSolenoidBottomLeftOuter, "Shooter", "Solenoid Bottom Left Outer");
+    SendableRegistry.setName(shooterSolenoidBottomLeftInner, "Shooter", "Solenoid Bottom Left Inner");
+    SendableRegistry.setName(shooterSolenoidBottomRightInner, "Shooter", "Solenoid Bottom Right Inner");
+    SendableRegistry.setName(shooterSolenoidBottomRightOuter, "Shooter", "Solenoid Bottom Right Outer");
+    SendableRegistry.setName(shooterSolenoidTopLeftOuter, "Shooter", "Solenoid Top Left Outer");
+    SendableRegistry.setName(shooterSolenoidTopLeftInner, "Shooter", "Solenoid Top Left Inner");
+    SendableRegistry.setName(shooterSolenoidTopRightInner, "Shooter", "Solenoid Top Right Inner");
+    SendableRegistry.setName(shooterSolenoidTopRightOuter, "Shooter", "Solenoid Top Right Outer");
   }
 }
