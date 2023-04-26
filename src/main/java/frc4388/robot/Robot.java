@@ -28,6 +28,8 @@ public class Robot extends TimedRobot {
   /** Initialization code for disabled mode should go here. */
   @Override
   public void disabledInit() {
+    m_robotContainer.ResetShooters();
+    // automaticly assume that when we dissable we will recharge the shooters
   }
 
   /** Periodic code for disabled mode should go here. */
@@ -53,6 +55,7 @@ public class Robot extends TimedRobot {
   /** Periodic code for teleop mode should go here. */
   @Override
   public void teleopPeriodic() {
+    m_robotContainer.putReadyState();
   }
 
   /** Initialization code for test mode should go here. */
