@@ -183,5 +183,24 @@ public class RobotContainer {
     // m_robotShooterTopRightInner.fire();
     // m_robotShooterTopRightOuter.fire();
   }
+  public void putReadyState() {
+    SmartDashboard.putBoolean("Bottom Left", m_robotShooterBottomLeft.isReady());
+    SmartDashboard.putBoolean("Bottom Middle", m_robotShooterBottomMiddle.isReady());
+    SmartDashboard.putBoolean("Bottom Right", m_robotShooterBottomRight.isReady());
+    
+    SmartDashboard.putBoolean("Top Left", m_robotShooterTopLeft.isReady());
+    SmartDashboard.putBoolean("Top Middle", m_robotShooterTopMiddle.isReady());
+    SmartDashboard.putBoolean("Top Right", m_robotShooterTopRight.isReady());
+    
+    // SmartDashboard.putBoolean("", m_robotShooterBottomLeftOuter.isReady());
+    // SmartDashboard.putBoolean("", m_robotShooterBottomLeftInner.isReady());
+    // SmartDashboard.putBoolean("", m_robotShooterBottomRightInner.isReady());
+    // SmartDashboard.putBoolean("", m_robotShooterBottomRightOuter.isReady());
+
+    // SmartDashboard.putBoolean("", m_robotShooterTopLeftOuter.isReady());
+    // SmartDashboard.putBoolean("", m_robotShooterTopLeftInner.isReady());
+    // SmartDashboard.putBoolean("", m_robotShooterTopRightInner.isReady());
+    // SmartDashboard.putBoolean("", m_robotShooterTopRightOuter.isReady());
+  }
   
 }

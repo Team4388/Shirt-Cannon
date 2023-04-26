@@ -75,19 +75,19 @@ public class RobotMap {
 
 
   private void configureLiveWindow() {
-    SendableRegistry.setName(driveMotorLeftFollower, "Drive", "Motor Left Follower");
-    SendableRegistry.setName(driveMotorRightFollower, "Drive", "Motor Right Follower");
-    SendableRegistry.setName(driveBase, "Drive", "Base");
+    // SendableRegistry.setName(driveMotorLeftFollower, "Drive", "Motor Left Follower");
+    // SendableRegistry.setName(driveMotorRightFollower, "Drive", "Motor Right Follower");
+    // SendableRegistry.setName(driveBase, "Drive", "Base");
 
-    SendableRegistry.setName(hornSolenoid, "Horn", "Solenoid");
+    // SendableRegistry.setName(hornSolenoid, "Horn", "Solenoid");
 
-    SendableRegistry.setName(shooterSolenoidBottomLeftOuter, "Shooter", "Solenoid Bottom Left Outer");
-    SendableRegistry.setName(shooterSolenoidBottomLeftInner, "Shooter", "Solenoid Bottom Left Inner");
-    SendableRegistry.setName(shooterSolenoidBottomRightInner, "Shooter", "Solenoid Bottom Right Inner");
-    SendableRegistry.setName(shooterSolenoidBottomRightOuter, "Shooter", "Solenoid Bottom Right Outer");
-    SendableRegistry.setName(shooterSolenoidTopLeftOuter, "Shooter", "Solenoid Top Left Outer");
-    SendableRegistry.setName(shooterSolenoidTopLeftInner, "Shooter", "Solenoid Top Left Inner");
-    SendableRegistry.setName(shooterSolenoidTopRightInner, "Shooter", "Solenoid Top Right Inner");
-    SendableRegistry.setName(shooterSolenoidTopRightOuter, "Shooter", "Solenoid Top Right Outer");
+    // SendableRegistry.setName(shooterSolenoidBottomLeftOuter, "Shooter", "Solenoid Bottom Left Outer");
+    // SendableRegistry.setName(shooterSolenoidBottomLeftInner, "Shooter", "Solenoid Bottom Left Inner");
+    // SendableRegistry.setName(shooterSolenoidBottomRightInner, "Shooter", "Solenoid Bottom Right Inner");
+    // SendableRegistry.setName(shooterSolenoidBottomRightOuter, "Shooter", "Solenoid Bottom Right Outer");
+    // SendableRegistry.setName(shooterSolenoidTopLeftOuter, "Shooter", "Solenoid Top Left Outer");
+    // SendableRegistry.setName(shooterSolenoidTopLeftInner, "Shooter", "Solenoid Top Left Inner");
+    // SendableRegistry.setName(shooterSolenoidTopRightInner, "Shooter", "Solenoid Top Right Inner");
+    // SendableRegistry.setName(shooterSolenoidTopRightOuter, "Shooter", "Solenoid Top Right Outer");
   }
 }
