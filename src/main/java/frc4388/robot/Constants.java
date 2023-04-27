@@ -12,8 +12,8 @@ package frc4388.robot;
 public final class Constants {
   public static final class DriveConstants {
     public static final int DRIVE_LEFT_LEADER_ID = 2;
-    public static final int DRIVE_RIGHT_LEADER_ID = 3;
-    public static final int DRIVE_LEFT_FOLLOWER_ID = 4;
+    public static final int DRIVE_RIGHT_LEADER_ID = 4;
+    public static final int DRIVE_LEFT_FOLLOWER_ID = 3;
     public static final int DRIVE_RIGHT_FOLLOWER_ID = 5;
   }
 

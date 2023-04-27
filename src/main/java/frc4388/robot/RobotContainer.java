@@ -29,7 +29,7 @@ public class RobotContainer {
   private final RobotMap m_robotMap = new RobotMap();
 
   /* Subsystems */
-  private final Drive m_robotDrive = new Drive(m_robotMap.driveMotorLeftLeader, m_robotMap.driveMotorRightLeader, m_robotMap.driveBase);
+  private final Drive m_robotDrive = new Drive(m_robotMap.driveMotorLeftLeader, m_robotMap.driveMotorRightLeader, m_robotMap.driveMotorLeftFollower, m_robotMap.driveMotorRightFollower, m_robotMap.driveBase);
 
   private final Shooter m_robotShooterBottomLeft = new Shooter(m_robotMap.shooterSolenoidBottomLeft);
   private final Shooter m_robotShooterBottomMiddle = new Shooter(m_robotMap.shooterSolenoidBottomMiddle);
@@ -63,6 +63,7 @@ public class RobotContainer {
     /* Default Commands */
     // drives the robot with a two-axis input from the driver controller
     m_robotDrive.setDefaultCommand(new RunCommand(() -> m_robotDrive.arcadeDrive(getController().getLeftY(), getController().getRightX()), m_robotDrive));
+    // m_robotDrive.setDefaultCommand(new RunCommand(() -> m_robotDrive.tankDrive(getController().getLeftY(), getController().getLeftY()), m_robotDrive));
   }
 
   /**

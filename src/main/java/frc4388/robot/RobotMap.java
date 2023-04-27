@@ -49,20 +49,20 @@ public class RobotMap {
     driveMotorLeftFollower.setNeutralMode(NeutralMode.Brake);
     driveMotorRightFollower.setNeutralMode(NeutralMode.Brake);
 
-    driveMotorLeftFollower.follow(driveMotorLeftLeader);
-    driveMotorRightFollower.follow(driveMotorRightLeader);
+    // driveMotorLeftFollower.follow(driveMotorLeftLeader);
+    // driveMotorRightFollower.follow(driveMotorRightLeader);
   }
 
   /* Horn Subsystem */
   //public final Solenoid hornSolenoid = new Solenoid(PneumaticsModuleType.REVPH, HORN_SOLENOID_ID);
 
   /* Shooter Subsystem */
-  public final Solenoid shooterSolenoidBottomLeft = new Solenoid(PneumaticsModuleType.REVPH, SHOOTER_SOLENOID_BOTTOM_LEFT_ID);
-  public final Solenoid shooterSolenoidBottomMiddle = new Solenoid(PneumaticsModuleType.REVPH, SHOOTER_SOLENOID_BOTTOM_MIDDLE_ID);
-  public final Solenoid shooterSolenoidBottomRight = new Solenoid(PneumaticsModuleType.REVPH, SHOOTER_SOLENOID_BOTTOM_RIGHT_ID);
-  public final Solenoid shooterSolenoidTopLeft = new Solenoid(PneumaticsModuleType.REVPH, SHOOTER_SOLENOID_TOP_LEFT_ID);
-  public final Solenoid shooterSolenoidTopMiddle = new Solenoid(PneumaticsModuleType.REVPH, SHOOTER_SOLENOID_TOP_MIDDLE_ID);
-  public final Solenoid shooterSolenoidTopRight = new Solenoid(PneumaticsModuleType.REVPH, SHOOTER_SOLENOID_TOP_RIGHT_ID);
+  public final Solenoid shooterSolenoidBottomLeft = new Solenoid(PneumaticsModuleType.CTREPCM, SHOOTER_SOLENOID_BOTTOM_LEFT_ID);
+  public final Solenoid shooterSolenoidBottomMiddle = new Solenoid(PneumaticsModuleType.CTREPCM, SHOOTER_SOLENOID_BOTTOM_MIDDLE_ID);
+  public final Solenoid shooterSolenoidBottomRight = new Solenoid(PneumaticsModuleType.CTREPCM, SHOOTER_SOLENOID_BOTTOM_RIGHT_ID);
+  public final Solenoid shooterSolenoidTopLeft = new Solenoid(PneumaticsModuleType.CTREPCM, SHOOTER_SOLENOID_TOP_LEFT_ID);
+  public final Solenoid shooterSolenoidTopMiddle = new Solenoid(PneumaticsModuleType.CTREPCM, SHOOTER_SOLENOID_TOP_MIDDLE_ID);
+  public final Solenoid shooterSolenoidTopRight = new Solenoid(PneumaticsModuleType.CTREPCM, SHOOTER_SOLENOID_TOP_RIGHT_ID);
   
   // public final Solenoid shooterSolenoidBottomLeftOuter = new Solenoid(PneumaticsModuleType.REVPH, SHOOTER_SOLENOID_BOTTOM_LEFT_OUTER_ID);
   // public final Solenoid shooterSolenoidBottomLeftInner = new Solenoid(PneumaticsModuleType.REVPH, SHOOTER_SOLENOID_BOTTOM_LEFT_INNER_ID);
