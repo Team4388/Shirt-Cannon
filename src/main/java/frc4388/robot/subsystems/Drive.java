@@ -48,7 +48,7 @@ public class Drive extends SubsystemBase {
 
     //set the motors
     m_leftMotor.set(-leftSpeed);
-    m_rightMotor.set(rightspeed);
+    m_rightMotor.set(rightSpeed);
   }
 
   public void tankDrive(double leftSpeed, double rightSpeed) {
