@@ -33,22 +33,26 @@ public class Drive extends SubsystemBase {
 
   public void hotwireDrive(double xStick, double yStick) {
     // deadzone constraints
-    double deadzone = 0.1d;
+    final double deadzone = 0.1d;
 
-    if (xStick <= (0.5+deadzone) && xStick >= (0.5-deadzone)) {xStick = 0.5d;}
-    if (yStick <= (0.5+deadzone) && yStick >= (0.5-deadzone)) {yStick = 0.5d;}
+    if (Math.abs(xStick) < deadzone) xStick = 0;
+    if (Math.abs(yStick) < deadzone) yStick = 0;
 
-    // if stick forword, drive both motors forward
-    double leftSpeed = -2 * (yStick - 0.5d);
-    double rightSpeed = -2 * (yStick - 0.5d);
+    double maximum    = Math.max(xStick, yStick);
+    double total      = xStick + yStick;
+    double difference = yStick - xStick;
 
-    // if stick right turn right
-    leftSpeed -= 2 * (xStick - 0.5d);
-    rightSpeed += 2 * (xStick - 0.5d);
+    double leftSpeed, rightSpeed;
+    if (xStick >= 0) {
+      leftSpeed  = rotate >= 0 ? maximum    : total;
+      rightSpeed = rotate >= 0 ? difference : maximum;
+    } else {
+      leftSpeed  = rotate >= 0 ? total    : -maximum;
+      rightSpeed = rotate >= 0 ? -maximum : difference;
+    }
 
-    //set the motors
-    m_leftMotor.set(-leftSpeed);
-    m_rightMotor.set(rightSpeed);
+    leftMotor.set(-leftSpeed);
+    rightMotor.set(leftSpeed);
   }
 
   public void tankDrive(double leftSpeed, double rightSpeed) {
