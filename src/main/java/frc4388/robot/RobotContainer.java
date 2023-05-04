@@ -62,8 +62,8 @@ public class RobotContainer {
 
     /* Default Commands */
     // drives the robot with a two-axis input from the driver controller
-    m_robotDrive.setDefaultCommand(new RunCommand(() -> m_robotDrive.hotwireDrive(getController().getLeftY(), getController().getRightX()), m_robotDrive));
-    // m_robotDrive.setDefaultCommand(new RunCommand(() -> m_robotDrive.tankDrive(getController().getLeftY(), getController().getLeftY()), m_robotDrive));
+    m_robotDrive.setDefaultCommand(new RunCommand(() -> m_robotDrive.hotwireDrive(getController().getRightX(), getController().getLeftY()), m_robotDrive));
+    // m_robotDrive.setDefaultCommand(new RunCommand(() -> m_robotDrive.tankDrive(getController().getLeftY(), getController().getRightY()), m_robotDrive));
   }
 
   /**
