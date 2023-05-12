@@ -32,8 +32,6 @@ public class Shooter extends SubsystemBase {
    * @return True if the shooter was ready or false if the shooter was not ready
    */
   public boolean fire() {
-    if (!isReady())
-      return false;
     m_solenoid.set(true);
     return true;
   }

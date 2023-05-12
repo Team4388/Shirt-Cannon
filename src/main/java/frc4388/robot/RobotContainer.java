@@ -26,7 +26,7 @@ import frc4388.robot.subsystems.Shooter;
  */
 public class RobotContainer {
   /* RobotMap */
-  private final RobotMap m_robotMap = new RobotMap();
+  public final RobotMap m_robotMap = new RobotMap();
 
   /* Subsystems */
   private final Drive m_robotDrive = new Drive(m_robotMap.driveMotorLeftLeader, m_robotMap.driveMotorRightLeader, m_robotMap.driveMotorLeftFollower, m_robotMap.driveMotorRightFollower, m_robotMap.driveBase);

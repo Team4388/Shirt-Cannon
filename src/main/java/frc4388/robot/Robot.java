@@ -16,6 +16,10 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
     m_robotContainer = new RobotContainer();
+    m_robotContainer.m_robotMap.driveBase.arcadeDrive(kDefaultPeriod, kDefaultPeriod);
+    m_robotContainer.m_robotMap.driveBase.setSafetyEnabled(true);;
+    m_robotContainer.m_robotMap.driveBase.setSafetyEnabled(true);;
+    
   }
 
   /** Periodic code for all robot modes should go here. */
@@ -56,6 +60,7 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     m_robotContainer.putReadyState();
+    m_robotContainer.m_robotMap.driveBase.arcadeDrive(m_robotContainer.getController().getLeftX(), m_robotContainer.getController().getLeftY());
   }
 
   /** Initialization code for test mode should go here. */
