@@ -16,6 +16,10 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
     m_robotContainer = new RobotContainer();
+    m_robotContainer.m_robotMap.driveBase.arcadeDrive(kDefaultPeriod, kDefaultPeriod);
+    m_robotContainer.m_robotMap.driveBase.setSafetyEnabled(true);;
+    m_robotContainer.m_robotMap.driveBase.setSafetyEnabled(true);;
+    
   }
 
   /** Periodic code for all robot modes should go here. */
@@ -28,6 +32,8 @@ public class Robot extends TimedRobot {
   /** Initialization code for disabled mode should go here. */
   @Override
   public void disabledInit() {
+    m_robotContainer.ResetShooters();
+    // automaticly assume that when we dissable we will recharge the shooters
   }
 
   /** Periodic code for disabled mode should go here. */
@@ -53,6 +59,8 @@ public class Robot extends TimedRobot {
   /** Periodic code for teleop mode should go here. */
   @Override
   public void teleopPeriodic() {
+    m_robotContainer.putReadyState();
+    m_robotContainer.m_robotMap.driveBase.arcadeDrive(m_robotContainer.getController().getLeftX(), m_robotContainer.getController().getLeftY());
   }
 
   /** Initialization code for test mode should go here. */
